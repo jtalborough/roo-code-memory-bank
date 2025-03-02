@@ -79,3 +79,6 @@ mode_triggers:
   debug:
     - condition: bug_detected
     - condition: implementation_issue
+  commit:
+    - condition: changes_ready_to_commit
+    - condition: branch_creation_needed
