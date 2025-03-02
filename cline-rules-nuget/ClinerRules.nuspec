@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>ClinerRules</id>
+    <version>1.0.0</version>
+    <title>Cline Rules</title>
+    <authors>Roo Veterinary Inc.</authors>
+    <owners>Roo Veterinary Inc.</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/rooveterinaryinc/cline-rules</projectUrl>
+    <description>Configuration files for Roo's CLI assistant</description>
+    <summary>This package contains configuration files (.clinerules-*) and the .roo directory that define the behavior of Roo's CLI assistant modes.</summary>
+    <releaseNotes>Initial release</releaseNotes>
+    <copyright>Copyright 2025 Roo Veterinary Inc.</copyright>
+    <tags>cline roo configuration cli assistant</tags>
+    <readme>docs\README.md</readme>
+  </metadata>
+  <files>
+    <!-- Configuration files -->
+    <file src="..\**\.clinerules-*" target="content" />
+    
+    <!-- .roo directory -->
+    <file src="..\**\.roo\**\*" target="content\.roo" />
+    
+    <!-- Build targets -->
+    <file src="build\ClinerRules.targets" target="build" />
+    
+    <!-- Documentation -->
+    <file src="README.md" target="docs\" />
+    <file src="..\LICENSE" target="docs\" />
+  </files>
+</package>

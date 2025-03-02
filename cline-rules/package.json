@@ -1,0 +1,40 @@
+{
+  "name": "cline-rules",
+  "version": "1.0.0",
+  "description": "Configuration files for Roo's CLI assistant",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "node scripts/extract-config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cline",
+    "roo",
+    "configuration",
+    "cli",
+    "assistant"
+  ],
+  "author": "Roo",
+  "license": "MIT",
+  "files": [
+    "scripts/",
+    ".clinerules-*",
+    ".roo/**/*",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "fs-extra": "^11.1.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rooveterinaryinc/cline-rules.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rooveterinaryinc/cline-rules/issues"
+  },
+  "homepage": "https://github.com/rooveterinaryinc/cline-rules#readme"
+}

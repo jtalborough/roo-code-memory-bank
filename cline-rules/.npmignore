@@ -1,0 +1,38 @@
+# Development files
+node_modules/
+.git/
+.github/
+.vscode/
+.idea/
+*.log
+*.tgz
+
+# Test files
+test/
+__tests__/
+*.test.js
+*.spec.js
+
+# Documentation files (except README.md which is included)
+docs/
+examples/
+CONTRIBUTING.md
+CHANGELOG.md
+
+# Build artifacts
+dist/
+build/
+coverage/
+
+# Temporary files
+.DS_Store
+Thumbs.db
+.env
+.env.*
+*.tmp
+*.temp
+
+# NuGet package files (handled separately)
+*.nuspec
+*.nupkg
+*.snupkg

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Target Name="CopyClinerRulesFiles" BeforeTargets="Build">
+    <Message Text="Copying Cline Rules configuration files to project root..." Importance="high" />
+    
+    <!-- Define source and destination paths -->
+    <PropertyGroup>
+      <ClinerRulesContentDir>$(MSBuildThisFileDirectory)..\content\</ClinerRulesContentDir>
+      <ProjectRootDir>$(MSBuildProjectDirectory)\</ProjectRootDir>
+    </PropertyGroup>
+    
+    <!-- Find all .clinerules-* files -->
+    <ItemGroup>
+      <ClinerRulesFiles Include="$(ClinerRulesContentDir).clinerules-*" />
+    </ItemGroup>
+    
+    <!-- Copy .clinerules-* files to project root with conflict handling -->
+    <Target Name="CopyClinerRulesConfigFiles" Inputs="@(ClinerRulesFiles)" Outputs="$(ProjectRootDir)%(Filename)%(Extension)">
+      <!-- Check if target file exists and create backup if needed -->
+      <PropertyGroup>
+        <TargetFile>$(ProjectRootDir)%(ClinerRulesFiles.Filename)%(ClinerRulesFiles.Extension)</TargetFile>
+        <BackupFile>$(ProjectRootDir)%(ClinerRulesFiles.Filename)%(ClinerRulesFiles.Extension).backup-$([System.DateTime]::Now.Ticks)</BackupFile>
+      </PropertyGroup>
+      
+      <!-- Create backup if file exists -->
+      <Copy SourceFiles="$(TargetFile)" DestinationFiles="$(BackupFile)" Condition="Exists('$(TargetFile)')" />
+      
+      <!-- Copy the file -->
+      <Copy SourceFiles="%(ClinerRulesFiles.FullPath)" DestinationFiles="$(TargetFile)" />
+      
+      <Message Text="Copied %(ClinerRulesFiles.Filename)%(ClinerRulesFiles.Extension) to project root" Importance="high" />
+    </Target>
+    
+    <!-- Find all .roo directory files -->
+    <ItemGroup>
+      <RooFiles Include="$(ClinerRulesContentDir).roo\**\*" />
+    </ItemGroup>
+    
+    <!-- Create .roo directory if it doesn't exist -->
+    <MakeDir Directories="$(ProjectRootDir).roo" Condition="!Exists('$(ProjectRootDir).roo')" />
+    
+    <!-- Copy .roo directory files to project root with conflict handling -->
+    <Target Name="CopyRooDirectoryFiles" Inputs="@(RooFiles)" Outputs="$(ProjectRootDir).roo\%(RecursiveDir)%(Filename)%(Extension)">
+      <!-- Determine relative path within .roo directory -->
+      <PropertyGroup>
+        <RelativePath>%(RooFiles.RecursiveDir)%(RooFiles.Filename)%(RooFiles.Extension)</RelativePath>
+        <TargetFile>$(ProjectRootDir).roo\$(RelativePath)</TargetFile>
+        <BackupFile>$(ProjectRootDir).roo\$(RelativePath).backup-$([System.DateTime]::Now.Ticks)</BackupFile>
+      </PropertyGroup>
+      
+      <!-- Create target directory if it doesn't exist -->
+      <MakeDir Directories="$(ProjectRootDir).roo\%(RooFiles.RecursiveDir)" Condition="!Exists('$(ProjectRootDir).roo\%(RooFiles.RecursiveDir)')" />
+      
+      <!-- Create backup if file exists -->
+      <Copy SourceFiles="$(TargetFile)" DestinationFiles="$(BackupFile)" Condition="Exists('$(TargetFile)')" />
+      
+      <!-- Copy the file -->
+      <Copy SourceFiles="%(RooFiles.FullPath)" DestinationFiles="$(TargetFile)" />
+      
+      <Message Text="Copied .roo\$(RelativePath) to project root" Importance="normal" />
+    </Target>
+    
+    <!-- Call the copy targets -->
+    <CallTarget Targets="CopyClinerRulesConfigFiles;CopyRooDirectoryFiles" />
+  </Target>
+</Project>
