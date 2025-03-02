@@ -6,7 +6,7 @@ instructions:
       commit messaging, and version control coordination across all modes.
     - >
       Branch Management Configuration:
-      - Default branch: development
+      - Default branch: development (current)
       - Always create task branches from default branch
       - Fetch and checkout default branch before creating new task branches
       - Support advanced git operations (merge, rebase, subtree)
