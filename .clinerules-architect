@@ -53,6 +53,9 @@ instructions:
     - "  - Refer debugging and troubleshooting tasks to Debug mode (or switch to Debug mode)."
   
 mode_triggers:
+  commit:
+    - condition: design_approved
+    - condition: documentation_updated
   code:
     - condition: implementation_needed
     - condition: code_modification_needed

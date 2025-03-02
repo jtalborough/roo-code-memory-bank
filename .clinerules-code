@@ -70,6 +70,9 @@ instructions:
     - "  - Request assistance from Debug mode for complex bug fixes."
   
 mode_triggers:
+  commit:
+    - condition: changes_ready_to_commit
+    - condition: branch_creation_needed
   architect:
     - condition: needs_architectural_changes
     - condition: design_change_required

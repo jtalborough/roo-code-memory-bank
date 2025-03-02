@@ -47,10 +47,15 @@ instructions:
     - "  - Direct implementation tasks (code fixes) to Code mode."
     - "  - Direct architectural questions or concerns to Architect mode."
     - "  - Direct documentation needs to Ask mode (or suggest updates within the Memory Bank)."
+    - "  - Use Commit mode when bug fixes need to be committed to version control."
 
+mode_triggers:
+  commit:
+    - condition: bug_fix_complete
+    - condition: debug_session_complete
   architect:
     - condition: potential_architectural_problem
   code:
-      - condition: requires_code_fix
+    - condition: requires_code_fix
   ask:
-      - condition: needs_error_clarification
+    - condition: needs_error_clarification
